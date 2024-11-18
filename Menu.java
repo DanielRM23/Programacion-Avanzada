@@ -17,6 +17,7 @@ public class Menu {
         System.out.println("2. Buscar un archivo en una carpeta");
         System.out.println("3. Obtener las dimensiones de un archivo");
         System.out.println("4. Dividir un archivo en subarchivos");
+        System.out.println("5. Filtrar un archivo");
         System.out.println("=========================\n ");
 
         // Crear un objeto Scanner para leer la entrada del usuario
@@ -40,6 +41,9 @@ public class Menu {
             case 4:
                 Dividir division = new Dividir();
                 division.dividir();
+                break;
+            case 5:
+                Filtrar.filtrar();
                 break;
             default:
                 // Mensaje de despedida si se ingresa una opción inválida

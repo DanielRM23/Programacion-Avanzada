@@ -3,6 +3,7 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Scanner;
 
 /**
  * La clase {@code Filtrar} proporciona métodos para filtrar los renglones de un
@@ -25,8 +26,10 @@ public class Filtrar {
      * @param valorFiltro    El valor que debe coincidir en la columna indicada para
      *                       que la línea sea incluida.
      */
-    public static void filtrarPorColumna(String archivoEntrada, String archivoSalida, String nombreColumna,
-            String valorFiltro) {
+    public static void filtrarPorColumna(String archivoEntrada, String nombreColumna, String valorFiltro) {
+
+        String archivoSalida = nombreColumna + valorFiltro + archivoEntrada;
+
         try (
                 BufferedReader brEntrada = new BufferedReader(new FileReader(archivoEntrada));
                 BufferedWriter bwSalida = new BufferedWriter(new FileWriter(archivoSalida))) {
@@ -83,11 +86,38 @@ public class Filtrar {
      * @return El índice de la columna, o -1 si no se encuentra.
      */
     private static int obtenerIndiceColumna(String[] columnas, String nombreColumna) {
+        String nombreColumnaLimpiado = nombreColumna.trim().toLowerCase(); // Limpia espacios y convierte a minúsculas
         for (int i = 0; i < columnas.length; i++) {
-            if (columnas[i].equalsIgnoreCase(nombreColumna)) {
+            String columnaLimpiada = columnas[i].replace("\"", "").trim().toLowerCase(); // Limpia comillas y espacios
+            if (columnaLimpiada.equals(nombreColumnaLimpiado)) {
                 return i;
             }
         }
         return -1; // Retornar -1 si no se encuentra la columna
     }
+
+    public static void filtrar() {
+        // Crear un objeto Scanner para leer los datos del usuario
+        Scanner sc = new Scanner(System.in);
+
+        // Solicitar al usuario el nombre del archivo de entrada
+        System.out.println("\nPor favor ingresa el nombre del archivo que deseas filtrar (con extensión): ");
+        String nombreArchivoIntroducido = sc.nextLine();
+
+        // Solicitar el nombre de la columna a filtrar
+        System.out.println("\nIngresa el nombre de la columna que deseas filtrar: ");
+        String nombreColumnaIntroducida = sc.nextLine();
+
+        // Solicitar el valor del filtro
+        System.out.println("\nIngresa el valor que deseas filtrar en la columna '" + nombreColumnaIntroducida + "': ");
+        String nombreValorFiltroIntroducido = sc.nextLine();
+
+        String archivoSalida = nombreColumnaIntroducida + nombreValorFiltroIntroducido + nombreArchivoIntroducido;
+
+        // Llamar al método para filtrar
+        filtrarPorColumna(nombreArchivoIntroducido, nombreColumnaIntroducida, nombreValorFiltroIntroducido);
+
+        System.out.println("\nEl archivo filtrado se ha guardado como: " + archivoSalida);
+    }
+
 }
