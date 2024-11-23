@@ -100,24 +100,34 @@ public class Filtrar {
         // Crear un objeto Scanner para leer los datos del usuario
         Scanner sc = new Scanner(System.in);
 
+        // Mostrar un mensaje inicial
+        System.out.println("=====================================================");
+        System.out.println("                 FILTRADO DE ARCHIVOS                ");
+        System.out.println("=====================================================");
+
         // Solicitar al usuario el nombre del archivo de entrada
-        System.out.println("\nPor favor ingresa el nombre del archivo que deseas filtrar (con extensión): ");
+        System.out.println("\n Por favor, ingresa el nombre del archivo que deseas filtrar (incluye la extensión):");
         String nombreArchivoIntroducido = sc.nextLine();
 
         // Solicitar el nombre de la columna a filtrar
-        System.out.println("\nIngresa el nombre de la columna que deseas filtrar: ");
+        System.out.println("\n Ingresa el nombre de la columna que deseas filtrar:");
         String nombreColumnaIntroducida = sc.nextLine();
 
         // Solicitar el valor del filtro
-        System.out.println("\nIngresa el valor que deseas filtrar en la columna '" + nombreColumnaIntroducida + "': ");
+        System.out.println("\n Ingresa el valor que deseas buscar en la columna '" + nombreColumnaIntroducida + "':");
         String nombreValorFiltroIntroducido = sc.nextLine();
 
-        String archivoSalida = nombreColumnaIntroducida + nombreValorFiltroIntroducido + nombreArchivoIntroducido;
+        // Formatear el nombre del archivo de salida
+        String archivoSalida = nombreColumnaIntroducida + nombreValorFiltroIntroducido + "_" + nombreArchivoIntroducido;
 
         // Llamar al método para filtrar
+        System.out.println("\n Procesando el archivo... Por favor, espera.");
         filtrarPorColumna(nombreArchivoIntroducido, nombreColumnaIntroducida, nombreValorFiltroIntroducido);
 
-        System.out.println("\nEl archivo filtrado se ha guardado como: " + archivoSalida);
+        // Mostrar mensaje de éxito
+        System.out.println("\n ¡Filtrado completado!");
+        System.out.println(" El archivo filtrado se ha guardado como: " + archivoSalida);
+        System.out.println("=====================================================");
     }
 
 }

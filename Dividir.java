@@ -117,6 +117,8 @@ public class Dividir implements IArchivo {
         System.out.println("Multiplicando por 4 para aprovechar concurrencia: " + (numCPUs * 4));
         System.out.println("El archivo se dividirá en " + numPartes + " subarchivos.");
         System.out.println("---------------------------------------------\n");
+        System.out.println("\n Procesando el archivo... Por favor, espera.");
+        System.out.println("---------------------------------------------\n");
 
         // Llamar al método dividirCSV para realizar la división del archivo
         dividirCSV(nombreArchivoIntroducido, numPartes);

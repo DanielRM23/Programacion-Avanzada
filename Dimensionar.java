@@ -86,6 +86,7 @@ public class Dimensionar {
         System.out.println("\n---------------------------------------------");
         System.out.println("Cálculo de las dimensiones del archivo");
         System.out.println("---------------------------------------------\n");
+        System.out.println("\n Procesando el archivo... Por favor, espera.");
         System.out.println("Número de renglones: " + numeroRenglones);
         System.out.println("Número de columnas: " + numeroColumnas);
     }
