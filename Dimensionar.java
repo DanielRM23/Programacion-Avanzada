@@ -78,9 +78,13 @@ public class Dimensionar {
         // Solicitar al usuario que seleccione un archivo usando la clase Buscar
         String rutaArchivo = Buscar.buscarArchivo();
 
+        // Método para iniciar el temporizador
+        Tiempo.iniciar();
         // Contar renglones y columnas en el archivo
         int numeroRenglones = contarRenglonesCSV(rutaArchivo);
         int numeroColumnas = contarColumnasCSV(rutaArchivo);
+        // Método para detener el temporizador
+        Tiempo.detener();
 
         // Mostrar las dimensiones del archivo al usuario
         System.out.println("\n---------------------------------------------");

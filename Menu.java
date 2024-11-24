@@ -30,20 +30,28 @@ public class Menu {
         // Lógica para ejecutar la opción seleccionada
         switch (opcionSeleccionada) {
             case 1:
+                Tiempo.iniciar();
                 Mostrar.mostrarCarpeta();
+                Tiempo.detener();
+                Tiempo.mostrarTiempo();
                 break;
             case 2:
                 Buscar.buscarArchivo();
+                Tiempo.mostrarTiempo();
                 break;
             case 3:
                 Dimensionar.dimensionar();
+                Tiempo.mostrarTiempo();
                 break;
             case 4:
                 Dividir division = new Dividir();
                 division.dividir();
+                // Método para calcular y mostrar el tiempo transcurrido
+                Tiempo.mostrarTiempo();
                 break;
             case 5:
                 Filtrar.filtrar();
+                Tiempo.mostrarTiempo();
                 break;
             default:
                 // Mensaje de despedida si se ingresa una opción inválida

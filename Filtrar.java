@@ -122,8 +122,12 @@ public class Filtrar {
 
         // Llamar al método para filtrar
         System.out.println("\n Procesando el archivo... Por favor, espera.");
-        filtrarPorColumna(nombreArchivoIntroducido, nombreColumnaIntroducida, nombreValorFiltroIntroducido);
 
+        // Método para iniciar el temporizador
+        Tiempo.iniciar();
+        filtrarPorColumna(nombreArchivoIntroducido, nombreColumnaIntroducida, nombreValorFiltroIntroducido);
+        // Método para detener el temporizador
+        Tiempo.detener();
         // Mostrar mensaje de éxito
         System.out.println("\n ¡Filtrado completado!");
         System.out.println(" El archivo filtrado se ha guardado como: " + archivoSalida);

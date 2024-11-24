@@ -28,12 +28,20 @@ public class Buscar {
             // Crear un objeto File para la ruta del directorio
             File carpeta = new File(nombreCarpetaIntroducido);
 
+            // Método para iniciar el temporizador
+            Tiempo.iniciar();
+
             // Llamada a la función recursiva para buscar el archivo
             String resultado = buscarArchivoRecursivo(carpeta, nombreArchivoIntroducido);
+            // Método para iniciar el temporizador
 
             if (resultado == null) {
                 System.out.println("\nNo se encontró el archivo, revisa si está bien escrito.");
             }
+
+            // Método para detener el temporizador
+            Tiempo.detener();
+
             return resultado;
         }
     }
@@ -57,7 +65,7 @@ public class Buscar {
                 for (File archivo : archivos) {
                     // Si es un archivo y contiene el nombre buscado
                     if (archivo.isFile() && archivo.getName().toLowerCase().contains(nombreArchivo.toLowerCase())) {
-                        System.out.println("\nArchivo encontrado en\n: " + archivo.getAbsolutePath());
+                        System.out.println("\nArchivo encontrado en:\n " + archivo.getAbsolutePath());
                         return archivo.getAbsolutePath();
                     }
 

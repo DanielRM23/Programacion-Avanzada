@@ -184,7 +184,11 @@ public class Dividir implements IArchivo {
         System.out.println("\n Procesando el archivo... Por favor, espera.");
         System.out.println("---------------------------------------------\n");
 
+        // Método para iniciar el temporizador
+        Tiempo.iniciar();
         // Llamar al método dividirCSV para realizar la división del archivo
         dividirCSV(nombreArchivoIntroducido, numPartes);
+        // Método para detener el temporizador
+        Tiempo.detener();
     }
 }
