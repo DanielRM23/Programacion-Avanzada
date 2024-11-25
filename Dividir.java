@@ -19,14 +19,14 @@ public class Dividir implements IArchivo {
      * @param numPartes El número de partes en las que se dividirá el archivo.
      */
     public void dividirCSV(String origen, int numPartes) {
-        // Crear un objeto File para el archivo de origen
-        File archivoOrigen = new File(RUTA_DEFAULT, origen);
+        // Crear un objeto File para el archivo de origen con la ruta completa
+        File archivoOrigen = new File(origen);
 
-        // Verificar si el archivo existe
-        if (!verificarExistencia(archivoOrigen)) {
-            System.out.printf("Archivo %s no existe.\n", origen);
-            return;
-        }
+        // // Verificar si el archivo existe
+        // if (!verificarExistencia(archivoOrigen)) {
+        // System.out.printf("Archivo %s no existe.\n", origen);
+        // return;
+        // }
 
         // Contar el número total de renglones en el archivo CSV
         int totalRenglones = Dimensionar.contarRenglonesCSV(archivoOrigen.getAbsolutePath());
@@ -35,6 +35,7 @@ public class Dividir implements IArchivo {
         int renglonesPorParte = (int) Math.ceil((double) totalRenglones / numPartes);
 
         // Crear subdirectorio "resultados" si no existe
+        // La carpeta se crea en donde se encuentra el archivo
         File directorioResultados = new File(archivoOrigen.getParent(), "resultados");
         if (!directorioResultados.exists()) {
             directorioResultados.mkdirs();
@@ -56,7 +57,7 @@ public class Dividir implements IArchivo {
             // Calcula el número de la última línea que debe copiarse al subarchivo actual.
             // Usa `Math.min` para evitar que el rango exceda el número total de líneas.
 
-            String nombreSubarchivo = generarNombreArchivo(origen, fechaActual, i + 1);
+            String nombreSubarchivo = generarNombreArchivo(archivoOrigen.getName(), fechaActual, i + 1);
             // Genera el nombre del subarchivo, incluyendo el número de parte y la fecha
             // actual.
 
@@ -73,7 +74,6 @@ public class Dividir implements IArchivo {
             // Imprime en consola un mensaje confirmando la creación del subarchivo,
             // incluyendo su nombre y el rango de líneas copiadas.
         }
-
     }
 
     /**
@@ -161,11 +161,19 @@ public class Dividir implements IArchivo {
         // Crear un objeto Scanner para leer los datos del usuario
         Scanner sc = new Scanner(System.in);
 
-        // Solicitar al usuario el nombre del archivo que se desea dividir
-        System.out.println("\n Por favor ingresa el nombre del archivo que deseas dividir: \n");
+        // Buscar el archivo en el directorio dado
+        String archivoEncontrado = Buscar.buscarArchivo(); // Maneja la búsqueda en el directorio
+                                                           // proporcionado
 
-        // Leer el nombre del archivo ingresado por el usuario
-        String nombreArchivoIntroducido = sc.nextLine();
+        // Si no se encuentra el archivo, salir del método
+        if (archivoEncontrado == null) {
+            System.out.println("No se encontró el archivo, terminando el proceso de división.");
+            return;
+        }
+
+        // Si se encuentra el archivo, proceder con la división
+        System.out.println("\nArchivo encontrado: " + archivoEncontrado);
+        System.out.println("\nCálculo de divisiones del archivo:");
 
         // Obtener el número de CPUs disponibles en la arquitectura actual
         int numCPUs = NumeroCPUs.numeroCPUs();
@@ -174,21 +182,20 @@ public class Dividir implements IArchivo {
         int numPartes = 4 * numCPUs; // Dividir el archivo en al menos 4 veces el número de CPUs
 
         // Mostrar información sobre las divisiones
-        System.out.println("\n---------------------------------------------");
-        System.out.println("Cálculo de divisiones del archivo:");
         System.out.println("---------------------------------------------");
         System.out.println("Número de CPU's detectados por la JVM: " + numCPUs);
         System.out.println("Multiplicando por 4 para aprovechar concurrencia: " + (numCPUs * 4));
         System.out.println("El archivo se dividirá en " + numPartes + " subarchivos.");
         System.out.println("---------------------------------------------\n");
-        System.out.println("\n Procesando el archivo... Por favor, espera.");
+        System.out.println("\nProcesando el archivo... Por favor, espera.");
         System.out.println("---------------------------------------------\n");
 
         // Método para iniciar el temporizador
         Tiempo.iniciar();
         // Llamar al método dividirCSV para realizar la división del archivo
-        dividirCSV(nombreArchivoIntroducido, numPartes);
+        dividirCSV(archivoEncontrado, numPartes);
         // Método para detener el temporizador
         Tiempo.detener();
     }
+
 }
