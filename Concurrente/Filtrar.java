@@ -105,32 +105,37 @@ public class Filtrar {
         System.out.println("                 FILTRADO DE ARCHIVOS                ");
         System.out.println("=====================================================");
 
-        // Solicitar al usuario el nombre del archivo de entrada
-        System.out.println("\n Por favor, ingresa el nombre del archivo que deseas filtrar (incluye la extensión):");
-        String nombreArchivoIntroducido = sc.nextLine();
+        // Obtener el archivo desde la clase Buscar
+        String archivoEncontrado = Buscar.buscarArchivo();
+
+        if (archivoEncontrado == null) {
+            System.out.println("\nNo se pudo encontrar el archivo. El proceso se detendrá.");
+            return; // Salir si no se encuentra el archivo
+        }
 
         // Solicitar el nombre de la columna a filtrar
-        System.out.println("\n Ingresa el nombre de la columna que deseas filtrar:");
+        System.out.println("\nIngresa el nombre de la columna que deseas filtrar:");
         String nombreColumnaIntroducida = sc.nextLine();
 
         // Solicitar el valor del filtro
-        System.out.println("\n Ingresa el valor que deseas buscar en la columna '" + nombreColumnaIntroducida + "':");
+        System.out.println("\nIngresa el valor que deseas buscar en la columna '" + nombreColumnaIntroducida + "':");
         String nombreValorFiltroIntroducido = sc.nextLine();
 
         // Formatear el nombre del archivo de salida
-        String archivoSalida = nombreColumnaIntroducida + nombreValorFiltroIntroducido + "_" + nombreArchivoIntroducido;
+        String archivoSalida = nombreColumnaIntroducida + nombreValorFiltroIntroducido + "_" + archivoEncontrado;
 
         // Llamar al método para filtrar
-        System.out.println("\n Procesando el archivo... Por favor, espera.");
+        System.out.println("\nProcesando el archivo... Por favor, espera.");
 
         // Método para iniciar el temporizador
         Tiempo.iniciar();
-        filtrarPorColumna(nombreArchivoIntroducido, nombreColumnaIntroducida, nombreValorFiltroIntroducido);
+        filtrarPorColumna(archivoEncontrado, nombreColumnaIntroducida, nombreValorFiltroIntroducido);
         // Método para detener el temporizador
         Tiempo.detener();
+
         // Mostrar mensaje de éxito
-        System.out.println("\n ¡Filtrado completado!");
-        System.out.println(" El archivo filtrado se ha guardado como: " + archivoSalida);
+        System.out.println("\n¡Filtrado completado!");
+        System.out.println("El archivo filtrado se ha guardado como: " + archivoSalida);
         System.out.println("=====================================================");
     }
 

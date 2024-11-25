@@ -18,6 +18,7 @@ public class Menu {
         System.out.println("3. Obtener las dimensiones de un archivo");
         System.out.println("4. Dividir un archivo en subarchivos");
         System.out.println("5. Filtrar un archivo");
+        System.out.println("6. Procesar archivos con hilos (extraer columnas específicas)");
         System.out.println("=========================\n ");
 
         // Crear un objeto Scanner para leer la entrada del usuario
@@ -46,11 +47,18 @@ public class Menu {
             case 4:
                 Dividir division = new Dividir();
                 division.dividir();
-                // Método para calcular y mostrar el tiempo transcurrido
                 Tiempo.mostrarTiempo();
                 break;
             case 5:
                 Filtrar.filtrar();
+                Tiempo.mostrarTiempo();
+                break;
+            case 6:
+                // Llamar al método para procesar los archivos con hilos
+                System.out.println("Iniciando procesamiento de archivos con hilos...");
+                Tiempo.iniciar();
+                ProcesamientoConHilos.procesarArchivos();
+                Tiempo.detener();
                 Tiempo.mostrarTiempo();
                 break;
             default:

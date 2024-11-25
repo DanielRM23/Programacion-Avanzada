@@ -159,17 +159,18 @@ public class Dividir implements IArchivo {
      */
     public void dividir() {
         // Crear un objeto Scanner para leer los datos del usuario
-        Scanner sc = new Scanner(System.in);
+        // Scanner sc = new Scanner(System.in);
 
         // Buscar el archivo en el directorio dado
         String archivoEncontrado = Buscar.buscarArchivo(); // Maneja la búsqueda en el directorio
                                                            // proporcionado
 
-        // Si no se encuentra el archivo, salir del método
-        if (archivoEncontrado == null) {
-            System.out.println("No se encontró el archivo, terminando el proceso de división.");
-            return;
-        }
+        // // Si no se encuentra el archivo, salir del método
+        // if (archivoEncontrado == null) {
+        // System.out.println("No se encontró el archivo, terminando el proceso de
+        // división.");
+        // return;
+        // }
 
         // Si se encuentra el archivo, proceder con la división
         System.out.println("\nArchivo encontrado: " + archivoEncontrado);
